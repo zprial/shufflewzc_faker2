@@ -101,7 +101,7 @@ async function run() {
                 // console.log(`任务${vo.taskName}，已完成`);
                 continue;
             }
-            console.log(`开始做${vo.taskName}:${vo.taskItem.itemName}`);
+            console.log(`开始做${vo.taskName}:${vo.taskItem?.itemName}`);
             if (vo.taskName == '每日签到') {
                 await doTask(vo.taskType, vo.taskItem.itemId, vo.id);
                 await getReward(vo.taskType, vo.taskItem.itemId, vo.id);

@@ -34,9 +34,17 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // IOS本地脚本用户这个列表填入你要助力的好友的shareCode
   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'lsvcdmfjrraodhrrvhcfiz7iye@olmijoxgmjuty7323i6ijrv5tdhd32kefogty5i@gf2njfitdloxldekzam2flrji4@mq65ksgdrkobhiyvkoqfi7ff7i5ac3f4ijdgqji@wkmb7lejrmax2avk7bszvx7s74@4npkonnsy7xi3acvl3goi4ga5gpmpv2km4yj3di@rj7s6mzlk7uognpgua34bszhyf4cpqqtj5vfhta@olmijoxgmjutyif5p35uuja6gwp2ulsp2x6fjoi@dzfuhp3b2fz7mnj5ndxxqsradgg5bsrhuof2mbq',
+  //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
   //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  'lsvcdmfjrraodhrrvhcfiz7iye@olmijoxgmjuty7323i6ijrv5tdhd32kefogty5i@gf2njfitdloxldekzam2flrji4@mq65ksgdrkobhiyvkoqfi7ff7i5ac3f4ijdgqji@wkmb7lejrmax2avk7bszvx7s74@4npkonnsy7xi3acvl3goi4ga5gpmpv2km4yj3di@rj7s6mzlk7uognpgua34bszhyf4cpqqtj5vfhta@olmijoxgmjutyif5p35uuja6gwp2ulsp2x6fjoi@dzfuhp3b2fz7mnj5ndxxqsradgg5bsrhuof2mbq',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
+  'f2ikwqc3vpsqsn7nsqvuscnnfe5ac3f4ijdgqji@mlrdw3aw26j3wwrqdmwd2a7trluhhoy5vkslj7a@4npkonnsy7xi2bpnv5gmpgoqz4yelhpibuuyl6i@nf4huobli66buqn2z2r4opc2je3h7wlwy7o5jii@e7lhibzb3zek32aotov3egwmkp3rxxnbjgkgdaq@olmijoxgmjutzy3skhj7xiuqxejrgnful527c2y@qemilkv7gzvhx4fwmdjspwldzu5ac3f4ijdgqji@ddbflnyzvpezfj6htbo7vr3io5hebbgd5mu33eq@hx2x3loqct573oj6f3gdplgiji',
 ]
 let allMessage = ``;
 let currentRoundId = null;//本期活动id
@@ -539,29 +547,7 @@ async function helpShare(plantUuid) {
 async function plantBeanIndex() {
   $.plantBeanIndexResult = await request('plantBeanIndex');//plantBeanIndexBody
 }
-function readShareCode() {
-  return new Promise(async resolve => {
-    $.get({url: `http://transfer.nz.lu/bean`, timeout: 10000}, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            console.log(`随机取个${randomCount}码放到您固定的互助码后面(不影响已有固定互助)`)
-            data = JSON.parse(data);
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
-    })
-    await $.wait(15000);
-    resolve()
-  })
-}
+
 //格式化助力码
 function shareCodesFormat() {
   return new Promise(async resolve => {
@@ -573,10 +559,6 @@ function shareCodesFormat() {
       console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
       newShareCodes = shareCodes[tempIndex].split('@');
-    }
-    const readShareCodeRes = await readShareCode();
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
-      newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
     }
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
