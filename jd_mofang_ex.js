@@ -196,7 +196,7 @@ async function doInteractiveAssignment(encryptProjectId, AssignmentId, sourceCod
             data = JSON.parse(data)
             if (data.subCode == '0') {
               if (type == 1) {
-                console.log(`当前兑换${data.rewardsInfo.successRewards['3'][0].rewardName}`);
+                console.log(`当前兑换${JSON.stringify(data.rewardsInfo)}`);
               }
             } else if (data.subCode == '1403' || data.subCode == '1703') {
               console.log(data.msg);

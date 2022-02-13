@@ -61,7 +61,7 @@ if ($.isNode()) {
 })().catch((e) => { $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '') }).finally(() => { $.done(); })
 
 async function domain() {
-    maxexchange = 1000;
+    maxexchange = 100;
     beans = await queryexpirebeans();
     if (beans.ret === 0) {
         beans.expirejingdou.map(item => {
@@ -70,7 +70,7 @@ async function domain() {
     }
     if (exjxbeans) {
         if (expirebeans) {
-            //为防止异常故障，每次最多兑换1000喜豆！
+            //为防止异常故障，每次最多兑换100喜豆！
             if (expirebeans < maxexchange) {
                 console.log(`您有${expirebeans}个京豆将在7天内过期,去执行兑换`);
                 let jxbeans = await exchangejxbeans(expirebeans);

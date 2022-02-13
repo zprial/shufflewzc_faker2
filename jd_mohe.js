@@ -210,7 +210,7 @@ function getCoin() {
           $.msg($.name, '领取失败', `${data.msg}`);
           $.done();
         } else {
-          console.log(`成功领取${data.data}热力值`)
+          console.log(`成功领取${JSON.stringify(data.data)}热力值`)
           resolve(data);
         }
       } catch (e) {
