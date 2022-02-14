@@ -1,7 +1,7 @@
-if (process.env.XFXD != "true") {
-    console.log("默认不运行,export XFXD='true'来运行\n需要手动过新手任务后再运行\n入口:APP-我的-左上角plus专属-会员店->天天领京豆->幸福小店\n可能黑号，自行评估跑不跑")
-    return
-}
+// if (process.env.XFXD != "true") {
+//     console.log("默认不运行,export XFXD='true'来运行\n需要手动过新手任务后再运行\n入口:APP-我的-左上角plus专属-会员店->天天领京豆->幸福小店\n可能黑号，自行评估跑不跑")
+//     return
+// }
 /*
 京东-幸福小店
 cron 18 0 * * * jd_xfxd.js
@@ -22,7 +22,8 @@ let httpResult //global buffer
 let userCookie = process.env.JD_COOKIE
 let userCookieArr = []
 let userList = []
-
+// 只给指定序号的账号操作这个脚本，默认只给第一个0
+let useIndexs = [0]
 
 let userIdx = 0
 let userCount = 0
@@ -153,9 +154,14 @@ async function checkEnv() {
         if(userCookie.indexOf('\n') > -1) splitChar = '\n'
         if(userCookie.indexOf('@') > -1) splitChar = '@'
         if(userCookie.indexOf('&') > -1) splitChar = '&'
+        const  userListTemp = []
         for(let userCookies of userCookie.split(splitChar)) {
-            if(userCookies) userList.push(new UserInfo(userCookies))
+            if(userCookies) userListTemp.push(new UserInfo(userCookies))
         }
+        for (let index of useIndexs) {
+            userList.push(userListTemp[index])
+        }
+
         userCount = userList.length
     } else {
         console.log('未找到京东ck')
