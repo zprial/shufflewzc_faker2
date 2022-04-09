@@ -4,7 +4,7 @@ Last Modified time: 2022-2-18
 活动入口：赚京豆-瓜分京豆(微信小程序)-赚京豆-瓜分京豆
 作者：搞鸡玩家
 已支持IOS双京东账号, Node.js支持N个京东账号
-30 0,13,,17 * * * jd_zjd.js
+30 0,13,17 * * * jd_zjd.js
  */
 const $ = new Env('赚京豆-瓜分');
 $.appId = 'dde2b';
