@@ -6,10 +6,10 @@
 export DY_OPENALL="true"
 */
 
-if (process.env.DY_OPENALL != "true") {
-  console.log('\n开卡任务部分加密默认不运行,设置变量export DY_OPENALL="true"来运行\n')
-  return
-}
+// if (process.env.DY_OPENALL != "true") {
+//   console.log('\n开卡任务部分加密默认不运行,设置变量export DY_OPENALL="true"来运行\n')
+//   return
+// }
 
 const $ = new Env('4月桌面好物和小天才-开卡');
 const Faker=require('./sign_graphics_validate.js') 
