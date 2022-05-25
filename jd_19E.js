@@ -73,7 +73,7 @@ let groups = [];
       let res;
       if (i % 30 == 0) {
         res = await promote_pk_getHomeData();
-        if (res.data.result.groupInfo.memberList) {
+        if (res.data.result.groupInfo?.memberList) {
           let memberCount = res.data.result.groupInfo.memberList.length;
           console.log("当前队伍有", memberCount, "人");
           let groupJoinInviteId = "";
