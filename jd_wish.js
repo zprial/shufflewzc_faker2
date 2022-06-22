@@ -5,14 +5,14 @@
 ===============Quantumultx===============
 [task_local]
 #众筹许愿池
-40 0,2,19 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+40 0,11,19 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 ================Loon==============
 [Script]
-cron "40 0,2,19 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js,tag=众筹许愿池
+cron "40 0,11,19 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js,tag=众筹许愿池
 ===============Surge=================
-众筹许愿池 = type=cron,cronexp="40 0,2,19 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js
+众筹许愿池 = type=cron,cronexp="40 0,11,19 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js
 ============小火箭=========
-众筹许愿池 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, cronexpr="40 0,2,19 * * *", timeout=3600, enable=true
+众筹许愿池 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_wish.js, cronexpr="40 0,11,19 * * *", timeout=3600, enable=true
  */
 const $ = new Env('众筹许愿池');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -22,8 +22,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ["1E1xZy6s","1EFRXxg","1EFRWxKuG","1FFVQyqw"];
-let appNameArr = ["PLUS生活特权","1","2","3"];
+let appIdArr = ["1EFNVyqeH","1E1xZy6s","1EFRXxg","1EFRWxKuG","1FFVQyqw"];
+let appNameArr = ["京东电器","PLUS生活特权","1","2","3"];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
@@ -142,7 +142,7 @@ async function jd_wish() {
 
 async function healthyDay_getHomeData(type = true) {
   return new Promise(async resolve => {
-    $.post(taskUrl('healthyDay_getHomeData', {"appId":appId,"taskToken":"","channelId":1}), async (err, resp, data) => {
+    $.post(taskUrl('healthyDay_getHomeData', { "appId": appId, "taskToken": "", "channelId": 1 }), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -151,17 +151,17 @@ async function healthyDay_getHomeData(type = true) {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (type) {
-               for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
-                  let vo = data.data.result.hotTaskVos[key]  
+                for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
+                  let vo = data.data.result.hotTaskVos[key]
                   if (vo.status !== 2) {
-                  if (vo.taskType === 12) {
-                    console.log(`点击热区`)
-                    await harmony_collectScore({"appId":appId,"taskToken":vo.simpleRecordInfoVo.taskToken,"taskId":vo.taskId,"actionType":"0"}, vo.taskType)
-                  }     
-                  }else {
-                  console.log(`【${vo.taskName}】已完成\n`)
+                    if (vo.taskType === 13 || vo.taskType === 12) {
+                      console.log(`点击热区`)
+                    await harmony_collectScore({ "appId": appId, "taskToken": vo.simpleRecordInfoVo.taskToken, "taskId": vo.taskId, "actionType": "0" }, vo.taskType)
+                    } else {
+                    console.log(`【${vo.taskName}】已完成\n`)
+                    }
+                  }
                 }
-               }
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
                 if (vo.status !== 2) {
@@ -190,6 +190,14 @@ async function healthyDay_getHomeData(type = true) {
                       if (productInfoVos.status !== 2) {
                         console.log(`【${productInfoVos.skuName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+                      }
+                    }
+                  } else if (vo.taskType === 3) {
+					for (let key of Object.keys(vo.shoppingActivityVos)) {
+                      let shoppingActivityVos = vo.shoppingActivityVos[key]
+                      if (shoppingActivityVos.status !== 2) {
+                        console.log(`【${vo.subTitleName}】`)
+                        await harmony_collectScore({ "appId": appId, "taskToken": shoppingActivityVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
                       }
                     }
                   } else if (vo.taskType === 8) {
