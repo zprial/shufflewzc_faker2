@@ -427,4 +427,3 @@ if __name__ == '__main__':
     start ()
     if '成功兑换' in msg_info:
         send (script_name, msg_info)
-        

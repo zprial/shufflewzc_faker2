@@ -14,9 +14,9 @@ cron "6 0,9 * * *" script-path=https://raw.githubusercontent.com/11111115/JDHelp
 芥么签到 = type=cron,script-path=https://raw.githubusercontent.com/11111115/JDHelp/main/jd_jieMo.js, cronexpr="6 0,9 * * *", timeout=3600, enable=true
 */
 const $ = new Env('芥么签到');
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 let appid = "yX3KNttlA6GbZjHuDz0-WQ", typeid = "44782287613952";

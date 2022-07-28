@@ -15,8 +15,8 @@ cron "2 2,15 * * *" script-path=jd_joypark_task.js,tag=汪汪乐园每日任务
 汪汪乐园每日任务 = type=cron,script-path=jd_joypark_task.js, cronexpr="2 2,15 * * *", timeout=3600, enable=true
 */
 const $ = new Env('汪汪乐园每日任务');
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 
