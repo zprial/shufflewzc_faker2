@@ -14,7 +14,7 @@
 
 const $ = new Env("热爱奇旅分19亿");
 
-const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
+const jdCookieNode = $.isNode() ? require("../jdCookie.js") : "";
 
 let cookiesArr = [],
   cookie = "";

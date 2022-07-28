@@ -5,9 +5,9 @@
  * 满30提现 目前有3、8、15、30的红包
  */
  const $ = new Env('签到领现金');
- const notify = $.isNode() ? require('./sendNotify') : '';
+ const notify = $.isNode() ? require('../sendNotify') : '';
  //Node.js用户请在jdCookie.js处填写京东ck;
- const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+ const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
  let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
  //IOS等用户直接用NobyDa的jd cookie
  let cookiesArr = [], cookie = '', message;
@@ -333,7 +333,7 @@
              'Connection': 'keep-alive',
              'Content-Type': 'application/json',
              'Referer': 'http://wq.jd.com/wxapp/pages/hd-interaction/index/index',
-             'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+             'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
              'Accept-Language': 'zh-cn',
              'Accept-Encoding': 'gzip, deflate, br',
          }
@@ -353,7 +353,7 @@
                  "Connection": "keep-alive",
                  "Cookie": cookie,
                  "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-                 "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+                 "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
              }
          }
          $.post(options, (err, resp, data) => {
