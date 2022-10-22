@@ -20,8 +20,8 @@ cron "5 4,14 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/m
 东东健康社区 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_health_help.js, cronexpr="5 4,14 * * *", timeout=3600, enable=true
  */
 const $ = new Env("东东健康社区内部互助");
-const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
-const notify = $.isNode() ? require('./sendNotify') : "";
+const jdCookieNode = $.isNode() ? require("../jdCookie.js") : "";
+const notify = $.isNode() ? require('../sendNotify') : "";
 let cookiesArr = [], cookie = "", allMessage = "", message;
 let reward = process.env.JD_HEALTH_REWARD_NAME ? process.env.JD_HEALTH_REWARD_NAME : '';
 const randomCount = $.isNode() ? 20 : 5;
@@ -202,7 +202,7 @@ function taskUrl(function_id, body = {}) {
 			'accept-encoding': 'gzip, deflate, br',
 			'accept': 'application/json, text/plain, */*',
 			'Content-Type': 'application/x-www-form-urlencoded',
-			"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+			"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
 		}
 	}
 }

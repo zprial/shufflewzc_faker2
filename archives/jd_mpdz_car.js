@@ -8,8 +8,8 @@
 */
 
 const $ = new Env("头文字JJJ");
-const jdCookieNode=$.isNode()?require('./jdCookie.js'):'';
-const notify=$.isNode()?require('./sendNotify'):'';
+const jdCookieNode=$.isNode()?require('../jdCookie.js'):'';
+const notify=$.isNode()?require('../sendNotify'):'';
 let cookiesArr=[],cookie='';
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => { cookiesArr.push(jdCookieNode[item])})

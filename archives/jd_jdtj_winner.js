@@ -19,9 +19,9 @@ cron "20 0-23/3 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJ
 京东特价翻翻乐 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_jdtj_winner.js, cronexpr="20 0-23/3 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京东特价翻翻乐');
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message = '', linkId = 'ouLEuSSoBzj9b9YYYIsiDA', fflLinkId = 'ouLEuSSoBzj9b9YYYIsiDA';
 const money = process.env.BIGWINNER_MONEY || 0.3
@@ -102,7 +102,7 @@ function gambleHomePage() {
         'Host': 'api.m.jd.com',
         'Origin': 'https://doublejoy.jd.com',
         'Accept': 'application/json, text/plain, */*',
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),                'Accept-Encoding': `gzip, deflate, br`,
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),                'Accept-Encoding': `gzip, deflate, br`,
         'Referer': `https://doublejoy.jd.com/?activityId${linkId}`,
         'Accept-Language': 'zh-cn',
         'Cookie': cookie

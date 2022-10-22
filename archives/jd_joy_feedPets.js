@@ -21,11 +21,11 @@ cron "15 0-23/1 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sy
 京东宠汪汪喂食 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_joy_feedPets.js, cronexpr="15 0-23/1 * * *", timeout=3600, enable=true
 */
 const $ = new Env('宠汪汪🐕喂食');
-const zooFaker = require('./JDJRValidator_Aaron');
+const zooFaker = require('../JDJRValidator_Aaron');
 $.get = zooFaker.injectToRequest2($.get.bind($));
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 if ($.isNode()) {
@@ -111,7 +111,7 @@ function feedPets(feedNum) {
         "Accept": "*/*",
         "Origin": "https://h5.m.jd.com",
         "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         "Referer": "https://h5.m.jd.com/",
         "Accept-Encoding": "gzip, deflate, br",
         "Cookie": cookie,
@@ -175,7 +175,7 @@ function ThreeMeals() {
         "Accept": "*/*",
         "Origin": "https://h5.m.jd.com",
         "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         "Referer": "https://h5.m.jd.com/",
         "Accept-Encoding": "gzip, deflate, br",
         "Cookie": cookie,
