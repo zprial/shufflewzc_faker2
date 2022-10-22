@@ -4,8 +4,8 @@
  * https://github.com/X1a0He/jd_scripts_fixed
  * */
 const $ = new Env("领京豆");
-const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
-const notify = $.isNode() ? require('./sendNotify') : '';
+const jdCookieNode = $.isNode() ? require("../jdCookie.js") : "";
+const notify = $.isNode() ? require('../sendNotify') : '';
 let cookiesArr = [], cookie = "", message = ``;
 $.taskInfos = [];
 $.viewAppHome = false;
