@@ -1,7 +1,9 @@
 /*
 店铺签到，各类店铺签到，有新的店铺直接添加token即可
+可设置变量DPSTOKEN='A&B&C'
+会和内置的token去重合并
 每日最多签到22家店铺，超出失败
-更新日期:2022-5-11
+更新日期:2022-11-6
 cron 3 0,23 * * * jd_dpsign.js, tag=店铺签到
 */
 const $ = new Env('店铺签到');
@@ -19,38 +21,33 @@ let vender=''
 let num=0
 let shopname=''
 
+let dptoken = [];
+if (process.env.DPSTOKEN) {
+    if (process.env.DPSTOKEN.indexOf('&')){
+        dptoken = process.env.DPSTOKEN.split('&');
+    } else {
+        dptoken.push(process.env.DPSTOKEN);
+    }
+}
+
 const token=[
 
-  "B96C035CBE1DEC7ADF9629402D29C937",//13
-  "210DEAF94D8AC3F504EADB6021B74B56",//7 
-  "40EDDC854F931DE9C6F6F3525313BB9F",//27  
-  "1FDB172863F1FDF384903B12E480D662",//45
-  "CF0E60148C5D318C6199F01F960264C1",//5
-  "E021AD736D4E49D9320D5E556217D5C0",//7
-  "B67276D929A8A43364993449B9CC7B11",//7
-  //"64C14CCE67522A9E5CB6ADAABEAC8366",//3  
-  //"9A90DDCE9DD5CF40BB8E5E817E64ADBB",//3
-  //"032B7EC9D12D7113E3B1D4947CB66DFB",//3
-  //"9D112935025746239099B25CB8B1EFEE",//3
-  //"5DC67D3B65A4B7FC93799C0D2D860ACC",//3  
-  //"FB289748C2ABAA40489BC7303C22190F",//1-6
-  //"DE9A8D7AB42C6A671F2D510E3154A41D",//1-6
-  //"39B8656B4CB174DBFA196CEFFA48F2FE",//7
-  //"31CBAB091B89B07B60DBAC9B0C14EC6F",//7
-  //"10D630FF0DC274BA90DBADAFCACC481F",//5
-  //"3569C202FFF8EED2A875BC2E23DEC7F4",//7 
-  //"6F3309E6CBD50C8C4A03369FC85D58B7",//7  
-  //"ADD0B95CCD75FF794A147F9A178A7CFE",//5
-  //"FB0FC42FDA3CDB9C64A2A9C9AFFFD1BD",//3
-  //"826E626A661D2A4402CD6230C3694DEC",//1
-  //"5C1B6A780727C7C2D177380C2B6E7D0B",//1
-  //"2B1B0C6408AE5F2732888C4F09FC335E",
-  //"7071DF3D16698C8B636A9385417C0413",//5
-  
+//"BD70E5803B23FE13267088252B6A07ED",
+//"DC0E5C0609D3003DC106B73B94A4EB4F",
+//"4F384998E0E7B99FC711C910E58AE693",
+//"E00B0DC7738C5662F745A7BC6D137B97",
+//"776D3DAAD242B860E89DF11077F82169",
+//"F95A1A59A36015BE04EE37236DB6CE87",
+//"33D71DB237DA8C9D84DC3B34F74AAC07",
+//"E969CCB6A0DF9392A021E3D604D892A2",
+//"D4A243F51F645969EF77A35C93F686A5",
+//"445AF0A22B42AFE6D6ABADDE2FD161C2",
+//"43B0F3550B339D30B1DC1B85198F5871",
+//"710F970D2C9D83AE4547C6CD97754DCB",
+//"264D069FBD411345AC26F8173FB9ABDB",
   
 ]
 
-$.TokenList =[];
 
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -74,13 +71,9 @@ if ($.isNode()) {
   }
   
 	$.TokenLists = []
-  
-        //$.innerTokenList = await getStoreTokee('https://zy.kejiwanjia.com/jd_dpqiandao.php');
-        $.innerTokenList = token
-	
-	$.TokenLists.push(...$.TokenList,...$.innerTokenList);
-
-	
+	$.TokenLists.push(...dptoken,...token);
+    $.TokenLists = [...new Set($.TokenLists)]
+    if ($.TokenLists.length === 0) {console.log('无店铺签到token，退出！');return};
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -116,7 +109,6 @@ if ($.isNode()) {
 async function babel_diy_zeus(){
 	
   for (var j = 0; j < $.TokenLists.length; j++) {
-	  
 	await $.wait(1000);  
     num=j+1
     if ($.TokenLists[j]=='') {continue}

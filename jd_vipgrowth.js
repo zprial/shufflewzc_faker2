@@ -84,8 +84,8 @@ async function info() {
                 } else {
                     data = JSON.parse(data)
                     if (data.success) {
-                        $.taskStatus = data.data.floorData.jxScoreTaskList.taskInfoList[0].taskStatus;
-                        $.taskEncId = data.data.floorData.jxScoreTaskList.taskInfoList[0].taskEncId;
+                        $.taskStatus = data.data.floorData.jxScoreTaskList.taskInfoList[0]?.taskStatus;
+                        $.taskEncId = data.data.floorData.jxScoreTaskList.taskInfoList[0]?.taskEncId;
                     } else {
                         console.log(data.message)
                     }

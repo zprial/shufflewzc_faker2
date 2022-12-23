@@ -521,13 +521,13 @@ function getTaskList() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            let beanTask = data.data.floorList.filter(vo => vo.floorName === "种豆得豆定制化场景")[0]
+            let beanTask = data.data?.floorList.filter(vo => vo.floorName === "种豆得豆定制化场景")[0]
             if (!beanTask.viewed) {
               await receiveTask()
               await $.wait(3000)
             }
 
-            let tasks = data.data.floorList.filter(vo => vo.floorName === "赚京豆")[0]['stageList']
+            let tasks = data.data?.floorList.filter(vo => vo.floorName === "赚京豆")[0]['stageList']
             for (let i = 0; i < tasks.length; ++i) {
               const vo = tasks[i]
               if (vo.viewed) continue

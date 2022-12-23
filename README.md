@@ -1,11 +1,5 @@
 ## 重要通知
-### 落霞与孤鹜齐飞,秋水共长天一色。
-
-Faker自用仓库，脚本收集者。不再收录新的加密脚本。
-
-#### [交流频道](https://t.me/pandaqx)
-
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=shufflewzc&bg_color=30,e96443,904e95&title_color=fff&text_color=fff)](https://github.com/anuraghazra/github-readme-stats)
+不再收录新的加密脚本!!!!!
 
 
 
