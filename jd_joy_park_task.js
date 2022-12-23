@@ -1,22 +1,11 @@
 /*
-脚本默认会帮我助力开工位，介意请添加变量HELP_JOYPARK，false为不助力
-export HELP_JOYPARK=""
-更新地址：https://github.com/Tsukasa007/my_script
-============Quantumultx===============
-[task_local]
-#汪汪乐园每日任务
+只做部分任务
+
 2 2,15 * * * jd_joypark_task.js, tag=汪汪乐园每日任务, img-url=https://raw.githubusercontent.com/tsukasa007/icon/master/jd_joypark_task.png, enabled=true
-================Loon==============
-[Script]
-cron "2 2,15 * * *" script-path=jd_joypark_task.js,tag=汪汪乐园每日任务
-===============Surge=================
-汪汪乐园每日任务 = type=cron,cronexp="2 2,15 * * *",wake-system=1,timeout=3600,script-path=jd_joypark_task.js
-============小火箭=========
-汪汪乐园每日任务 = type=cron,script-path=jd_joypark_task.js, cronexpr="2 2,15 * * *", timeout=3600, enable=true
 */
 const $ = new Env('汪汪乐园每日任务');
-const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
-const notify = $.isNode() ? require('../sendNotify') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 
@@ -48,7 +37,9 @@ message = ""
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
-      $.openIndex = 0
+      $.openIndex = 0;
+	  $.UA = `jdapp;iPhone;10.1.4;13.1.2;${randomString(40)};network/wifi;model/iPhone8,1;addressid/2308460611;appBuild/167814;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`
+
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       // if ($.isNode()) {
       //   if (process.env.HELP_JOYPARK && process.env.HELP_JOYPARK == "false") {
@@ -68,8 +59,8 @@ message = ""
       //     }
       //   }
       // }
-      await getJoyBaseInfo()
-      if ($.joyBaseInfo && $.joyBaseInfo.invitePin) {
+      /*await getJoyBaseInfo()
+      f ($.joyBaseInfo && $.joyBaseInfo.invitePin) {
         $.log(`${$.name} - ${$.UserName}  助力码: ${$.joyBaseInfo.invitePin}`);
         $.invitePinTaskList.push($.joyBaseInfo.invitePin);
       } else {
@@ -78,7 +69,7 @@ message = ""
         $.isLogin = false
         $.log("服务端异常，不知道为啥有时候这样，后面再观察一下，手动执行应该又没问题了")
         continue
-      }
+      }*/
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
           "open-url": "https://bean.m.jd.com/bean/signIndex.action"
@@ -119,7 +110,7 @@ message = ""
             }
             $.log(`${task.taskTitle} ${task.taskDoTimes}/${task.taskLimitTimes}`);
             let resp = await apDoTask(task.id, task.taskType, productList[productListNow].itemId, productList[productListNow].appid);
-
+            await $.wait(1000)
             if (resp.code === 2005 || resp.code === 0) {
               $.log(`${task.taskTitle}|${task.taskShowTitle} 任务完成！`)
             } else {
@@ -163,7 +154,7 @@ message = ""
       }
     }
   }
-
+/*
   $.log("\n======汪汪乐园开始内部互助======\n")
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
@@ -206,6 +197,7 @@ message = ""
       }
     }
   }
+  */
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done())
@@ -359,10 +351,10 @@ function apTaskDrawAward(taskId, taskType) {
 
 function taskPostClientActionUrl(body, functionId) {
   return {
-    url: `https://api.m.jd.com/client.action?${functionId ? `functionId=${functionId}` : ``}`,
+    url: `https://api.m.jd.com/client.action${functionId ? `?functionId=${functionId}` : ''}`,
     body: body,
     headers: {
-      'User-Agent': 'jdltapp;iPhone;3.5.6;14.6;eac3e15e91fd380664fc7c788e8ab6a07805646d;network/4g;ADID/8F6CAEEA-5BF7-4F7E-86C3-A641C19CA832;hasUPPay/0;pushNoticeIsOpen/0;lang/zh_CN;model/iPhone13,2;addressid/1995295948;hasOCPay/0;appBuild/1070;supportBestPay/0;pv/41.26;apprpd/;ref/JDLTSubMainPageViewController;psq/2;ads/;psn/eac3e15e91fd380664fc7c788e8ab6a07805646d|112;jdv/0|kong|t_500509960_|jingfen|bb9c79e4c4174521873879a27a707da4|1625071927291|1625071930;adk/;app_device/IOS;pap/JA2020_3112531|3.5.6|IOS 14.6;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+      'User-Agent': $.UA,
       'Content-Type': 'application/x-www-form-urlencoded',
       'Host': 'api.m.jd.com',
       'Origin': 'https://joypark.jd.com',
@@ -371,7 +363,13 @@ function taskPostClientActionUrl(body, functionId) {
     }
   }
 }
-
+function randomString(e) {
+  e = e || 32;
+  let t = "abcdef0123456789", a = t.length, n = "";
+  for (i = 0; i < e; i++)
+    n += t.charAt(Math.floor(Math.random() * a));
+  return n
+}
 function jsonParse(str) {
   if (typeof str == "string") {
     try {
